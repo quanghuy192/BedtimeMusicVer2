@@ -39,7 +39,7 @@ public class FavoriteTab extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.favorite_layout, null);
+		View view = inflater.inflate(R.layout.music_favorite_fragment, null);
 
 		/**
 		 * 
@@ -60,7 +60,7 @@ public class FavoriteTab extends Fragment {
 		}
 
 		favoriteList = (ListView) view.findViewById(R.id.listview);
-		adapter = new MyAdapter(getActivity(), R.layout.favorite_layout,
+		adapter = new MyAdapter(getActivity(), R.layout.music_favorite_fragment,
 				getItems());
 		favoriteList.setAdapter(adapter);
 		favoriteList.setOnItemClickListener(new OnItemClickListener() {

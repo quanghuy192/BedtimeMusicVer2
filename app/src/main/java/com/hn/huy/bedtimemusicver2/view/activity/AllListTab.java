@@ -38,7 +38,7 @@ public class AllListTab extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.listview, null);
+		View view = inflater.inflate(R.layout.music_list_fragment, null);
 
 		/**
 		 * Tham chieu den danh sach bai hat trong CurrentActivity , neu tham

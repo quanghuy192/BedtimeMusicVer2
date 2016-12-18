@@ -26,8 +26,8 @@ public class SettingTimeFragment extends BaseFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public MainPlayFragment newInstance(int sectionNumber) {
-        MainPlayFragment fragment = new MainPlayFragment();
+    public BaseFragment newInstance(int sectionNumber) {
+        SettingTimeFragment fragment = new SettingTimeFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -37,7 +37,7 @@ public class SettingTimeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_play_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.setting_time_fragment, container, false);
         return rootView;
     }
 }
