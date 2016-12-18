@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="icon_margin_5">5dp</dimen>
+    <dimen name="icon_margin_10">10dp</dimen>
+    <dimen name="icon_margin_20">20dp</dimen>
+    <dimen name="icon_margin_25">15dp</dimen>
+    <dimen name="icon_margin_35">35dp</dimen>
+    <dimen name="icon_margin_50">50dp</dimen>
+    <dimen name="icon_margin_75">75dp</dimen>
+    <dimen name="icon_margin_100">100dp</dimen>
+    <dimen name="icon_margin_200">200dp</dimen>
+    <dimen name="icon_margin_250">250dp</dimen>
+    <dimen name="icon_margin_300">300dp</dimen>
+    <dimen name="icon_margin_350">300dp</dimen>
+    <dimen name="icon_margin_400">400dp</dimen>
+    <dimen name="icon_margin_600">600dp</dimen>
+
+    <dimen name="song_title_font_size_l">15sp</dimen>
+    <dimen name="song_title_font_size_m">30sp</dimen>
+    <dimen name="song_title_font_size_h">45sp</dimen>
+
+</resources>
