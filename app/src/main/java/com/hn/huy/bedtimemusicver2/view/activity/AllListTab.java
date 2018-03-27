@@ -26,6 +26,8 @@ import com.hn.huy.bedtimemusicver2.service.PlayerService;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.hn.huy.bedtimemusicver2.R.layout.music_item;
+
 public class AllListTab extends Fragment {
 
 	private ListView listview;
@@ -38,20 +40,15 @@ public class AllListTab extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.music_list_fragment, null);
-
-		/**
-		 * Tham chieu den danh sach bai hat trong CurrentActivity , neu tham
-		 * chieu null thi throw Exception
-		 * */
+		View view = inflater.inflate(R.layout.music_fragment, null);
 
 		try {
 		//	listSong = MainActivity.songsList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		listview = (ListView) view.findViewById(R.id.listview);
-		adapter = new MyAdapter(getActivity(), R.layout.item, getItems());
+		// listview = (ListView) view.findViewById(R.id.listview);
+		adapter = new MyAdapter(getActivity(), music_item, getItems());
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -72,12 +69,6 @@ public class AllListTab extends Fragment {
 			}
 		});
 
-		/**
-		 * 
-		 * Dang ki ContextMenu
-		 * 
-		 * */
-
 		registerForContextMenu(listview);
 		return view;
 	}
@@ -91,16 +82,8 @@ public class AllListTab extends Fragment {
 			arrayList = objects;
 		}
 
-		/**
-		 * GetView de tra lai custemView cho moi row
-		 * */
-
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
-			/**
-			 * Gan view = convertwView Neu view == null , thi tao moi
-			 * */
 
 			View view = convertView;
 
@@ -108,23 +91,13 @@ public class AllListTab extends Fragment {
 				LayoutInflater layoutinflate = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-				view = layoutinflate.inflate(R.layout.item, parent, false);
+				view = layoutinflate.inflate(music_item, parent, false);
 				viewHolder = new ViewHolder(view);
-
-				/**
-				 * Su dung viewHolder
-				 * */
-
 				view.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder) view.getTag();
 			}
 			Music music = arrayList.get(position);
-
-			/**
-			 * Set Text cho moi row
-			 * */
-
 			viewHolder.songTitle.setText(music.getSongTitle());
 			viewHolder.songArtist.setText(music.getSongArtist());
 
@@ -159,10 +132,6 @@ public class AllListTab extends Fragment {
 
 	}
 
-	/**
-	 * ContextView
-	 * */
-
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
@@ -178,10 +147,6 @@ public class AllListTab extends Fragment {
 		ArrayAdapter<Music> adapter = (ArrayAdapter<Music>) listview
 				.getAdapter();
 
-		/**
-		 * Lay item
-		 * */
-
 		MusicAccessDatabase writeDatabase = new MusicAccessDatabase(getActivity());
 		writeDatabase.openToWrite();
 		switch (item.getItemId()) {
@@ -192,12 +157,6 @@ public class AllListTab extends Fragment {
 					currentMusic.getSongTitle()
 							+ " is add to your favorite list ",
 					Toast.LENGTH_SHORT).show();
-
-			/**
-			 * 
-			 * Add music vao favorite list tu moi vi tri duoc adapter lay ra
-			 * 
-			 * */
 
 			writeDatabase.add(currentMusic);
 			writeDatabase.close();

@@ -39,7 +39,7 @@ public class FavoriteTab extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.music_favorite_fragment, null);
+		View view = inflater.inflate(R.layout.music_fragment, null);
 
 		/**
 		 * 
@@ -59,8 +59,8 @@ public class FavoriteTab extends Fragment {
 			e.printStackTrace();
 		}
 
-		favoriteList = (ListView) view.findViewById(R.id.listview);
-		adapter = new MyAdapter(getActivity(), R.layout.music_favorite_fragment,
+		// favoriteList = (ListView) view.findViewById(R.id.listview);
+		adapter = new MyAdapter(getActivity(), R.layout.music_fragment,
 				getItems());
 		favoriteList.setAdapter(adapter);
 		favoriteList.setOnItemClickListener(new OnItemClickListener() {
@@ -120,7 +120,7 @@ public class FavoriteTab extends Fragment {
 				LayoutInflater layoutinflate = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-				view = layoutinflate.inflate(R.layout.favorite_item, parent,
+				view = layoutinflate.inflate(R.layout.music_item, parent,
 						false);
 				viewHolder = new ViewHolder(view);
 				// use viewHorder

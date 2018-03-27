@@ -1,10 +1,9 @@
-package com.hn.huy.bedtimemusicver2.Utilities;
+package com.hn.huy.bedtimemusicver2.utilities;
 
 
 public class Utilities {
 	
 	private Utilities() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

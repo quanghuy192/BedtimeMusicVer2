@@ -59,12 +59,6 @@ public class MusicAccessDatabase {
                 null, null, null, null, null);
         listCursor.moveToFirst();
 
-        /**
-         *
-         * Neu con tro khac null
-         *
-         * */
-
         while (!listCursor.isAfterLast()) {
             HashMap<String, String> list = new HashMap<String, String>();
             list.put("songId", String.valueOf(listCursor.getLong(0)));
@@ -80,31 +74,13 @@ public class MusicAccessDatabase {
         }
         listCursor.close();
 
-        /**
-         *
-         * Tra lai list music tu database
-         *
-         * */
-
         return songListDB;
 
     }
 
     public void add(Music currentMusic) {
 
-        /**
-         *
-         * Them gia tri vao bang contenvalue
-         *
-         * */
-
         ContentValues contentValue = new ContentValues();
-
-        /**
-         *
-         * Log
-         *
-         * */
 
         contentValue.put(Database.PATH_NAME, currentMusic.getSongPath());
         Log.i("TAG", currentMusic.getSongPath());
@@ -112,12 +88,6 @@ public class MusicAccessDatabase {
         Log.i("TAG", currentMusic.getSongTitle());
         contentValue.put(Database.ARTIST_NAME, currentMusic.getSongArtist());
         Log.i("TAG", currentMusic.getSongArtist());
-
-        /**
-         *
-         * Insert vao database
-         *
-         * */
 
         long id = dataBase.insert(Database.DATABASE_LIST, null, contentValue);
         Cursor cursor = dataBase.query(Database.DATABASE_LIST, listColumn,
@@ -131,22 +101,13 @@ public class MusicAccessDatabase {
 
     }
 
-    /**
-     * Remove song
-     */
-
-    public void remove(Music currentMusic) {
+    /*public void remove(Music currentMusic) {
         long id = currentMusic.getId();
         dataBase.delete(Database.DATABASE_LIST, Database.KEY_ID + "=" + id,
                 null);
-    }
-
-    /**
-     * Remove all
-     */
+    }*/
 
     public void removeAll() {
         dataBase.delete(Database.DATABASE_LIST, null, null);
     }
-
 }

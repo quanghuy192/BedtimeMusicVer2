@@ -23,13 +23,13 @@ public class BaseAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        switch (position){
+        switch (position) {
             case 0:
                 return new MainPlayFragment().newInstance(position + 1);
             case 1:
-                return new MusicFavoriteFragment().newInstance(position + 1);
-            case 2:
                 return new MusicListFragment().newInstance(position + 1);
+            case 2:
+                return new MusicFavoriteFragment().newInstance(position + 1);
             case 3:
                 return new SettingTimeFragment().newInstance(position + 1);
         }

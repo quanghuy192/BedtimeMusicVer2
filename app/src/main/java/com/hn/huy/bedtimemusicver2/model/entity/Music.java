@@ -1,54 +1,35 @@
 package com.hn.huy.bedtimemusicver2.model.entity;
 
-public class Music {
-	private String songTitle;
-	private String songArtist;
-	private String songPath;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
-	public Music() {
-		// TODO Auto-generated constructor stub
-	}
+public class Music extends RealmObject {
 
-	public Music(String songTitle, String songArtist, String songPath, long id) {
-		// TODO Auto-generated constructor stub
-		this.id = id;
-		this.songArtist = songArtist;
-		this.songPath = songPath;
-		this.songTitle = songTitle;
-	}
+    @PrimaryKey
+    private String songTitle;
 
-	public String getSongTitle() {
-		return songTitle;
-	}
+    @Required
+    private String songArtist;
 
-	public void setSongTitle(String songTitle) {
-		this.songTitle = songTitle;
-	}
+    @Required
+    private String songPath;
 
-	public String getSongArtist() {
-		return songArtist;
-	}
+    public Music(String songTitle, String songArtist, String songPath) {
+        this.songArtist = songArtist;
+        this.songPath = songPath;
+        this.songTitle = songTitle;
+    }
 
-	public void setSongArtist(String songArtist) {
-		this.songArtist = songArtist;
-	}
+    public String getSongTitle() {
+        return songTitle;
+    }
 
-	public String getSongPath() {
-		return songPath;
-	}
+    public String getSongArtist() {
+        return songArtist;
+    }
 
-	public void setSongPath(String songPath) {
-		this.songPath = songPath;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	private long id;
-
+    public String getSongPath() {
+        return songPath;
+    }
 }
