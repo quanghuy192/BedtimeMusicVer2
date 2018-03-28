@@ -23,6 +23,7 @@ import com.hn.huy.bedtimemusicver2.view.fragment.MusicListFragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import static com.hn.huy.bedtimemusicver2.utilities.Utilities.milliSecondsToTimer;
@@ -30,9 +31,9 @@ import static com.hn.huy.bedtimemusicver2.utilities.Utilities.milliSecondsToTime
 public class PlayerService extends Service implements
         OnCompletionListener {
 
-    private ArrayList<HashMap<String, String>> songsListingSD = new ArrayList<HashMap<String, String>>();
+    private List<HashMap<String, String>> songsListingSD = new ArrayList<HashMap<String, String>>();
     public static int currentSongIndex = -1;
-    public static ArrayList<HashMap<String, String>> songsListFavorite = new ArrayList<HashMap<String, String>>();
+    public static List<HashMap<String, String>> songsListFavorite = new ArrayList<HashMap<String, String>>();
     public static MediaPlayer mediaPlayer;
     public static TextView songCurrentDurationLabel;
     public static TextView songTotalDurationLabel;
@@ -44,7 +45,6 @@ public class PlayerService extends Service implements
     @Override
     public void onCreate() {
         super.onCreate();
-
         mPlayerService = this;
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(this);
@@ -87,7 +87,7 @@ public class PlayerService extends Service implements
         return START_NOT_STICKY;
     }
 
-    public int getSizeOfMusicList(){
+    public int getSizeOfMusicList() {
         return songsListingSD.size();
     }
 
@@ -153,9 +153,9 @@ public class PlayerService extends Service implements
         intent.putExtra("songTotalDuration", songTotalDuration);
         intent.putExtra("songCurrentDuration", songCurrentDuration);
         intent.putExtra("songProgress", mProgress);
-        intent.putExtra("changeIcon",1);
+        intent.putExtra("changeIcon", 1);
 
-        Log.i("Duration","" + mProgress);
+        Log.i("Duration", "" + mProgress);
 
         sendBroadcast(intent);
     }
@@ -172,9 +172,9 @@ public class PlayerService extends Service implements
         intent.putExtra("songTotalDuration", milliSecondsToTimer(totalDuration));
         intent.putExtra("songCurrentDuration", milliSecondsToTimer(currentDuration));
         intent.putExtra("songProgress", mProgress);
-        intent.putExtra("changeIcon",1);
+        intent.putExtra("changeIcon", 1);
 
-        Log.i("Duration","" + mProgress);
+        Log.i("Duration", "" + mProgress);
 
         sendBroadcast(intent);
     }
@@ -251,7 +251,7 @@ public class PlayerService extends Service implements
                     currentDuration, totalDuration));
 
             // progress.setProgress(mProgress);
-            sendStatusCurrentSong(currentDuration,totalDuration);
+            sendStatusCurrentSong(currentDuration, totalDuration);
             // Running this thread after 100 milliseconds
             progressBarHandler.postDelayed(this, 100);
 

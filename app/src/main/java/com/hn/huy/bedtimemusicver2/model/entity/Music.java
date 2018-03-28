@@ -15,6 +15,9 @@ public class Music extends RealmObject {
     @Required
     private String songPath;
 
+    public Music() {
+    }
+
     public Music(String songTitle, String songArtist, String songPath) {
         this.songArtist = songArtist;
         this.songPath = songPath;

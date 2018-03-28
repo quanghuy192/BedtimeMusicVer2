@@ -64,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // Get All song list from storage
                 LoadDataFromSdCard loadDataFromSdCard = new LoadDataFromSdCard();
-                listSong = loadDataFromSdCard.getList(this);
+                listSong = loadDataFromSdCard.getListSong(this);
             }
         } else {
             LoadDataFromSdCard loadDataFromSdCard = new LoadDataFromSdCard();
-            listSong = loadDataFromSdCard.getList(this);
+            listSong = loadDataFromSdCard.getListSong(this);
         }
 
 
@@ -104,16 +104,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToTab(TypeFragment type) {
-
         // move to other tab
         mViewPager.setCurrentItem(type.ordinal());
     }
 
     public List<HashMap<String, String>> getListSong() {
-
-        if (!com.hn.huy.bedtimemusicver2.utilities.ValidatorUtilities.isEmptyForList(listSong)) {
-            return new ArrayList<>();
-        }
+        if (!com.hn.huy.bedtimemusicver2.utilities.ValidatorUtilities.isEmptyForList(listSong)) return new ArrayList<>();
         return listSong;
     }
 

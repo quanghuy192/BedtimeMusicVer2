@@ -4,7 +4,11 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import com.hn.huy.bedtimemusicver2.model.business.LoadDataFromSdCard;
 import com.hn.huy.bedtimemusicver2.service.PlayerService;
+
+import java.util.HashMap;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -18,15 +22,11 @@ public class MusicApplication extends Application {
     public static Intent playerService;
     private boolean mRepeat = false;
     private boolean mShuffle = false;
-    private static RealmConfiguration configuration = new RealmConfiguration.Builder()
-            .name("music.realm")
-            .schemaVersion(1)
-            .build();
-    private static Realm myRealm  = Realm.getInstance(configuration);
+    private static Realm myRealm;
+    private static List<HashMap<String, String>> listSong;
 
     public enum SingletonApplication {
         INSTANCE;
-
         private MusicApplication application = new MusicApplication();
 
         public MusicApplication getInstance() {
@@ -37,11 +37,15 @@ public class MusicApplication extends Application {
     public MusicApplication() {
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Realm.init(getApplicationContext());
+        myRealm = Realm.getDefaultInstance();
         playerService = new Intent(getApplicationContext(), PlayerService.class);
+        LoadDataFromSdCard dataFromSdCard = new LoadDataFromSdCard();
+        listSong = dataFromSdCard.getListSong(getApplicationContext());
     }
 
     @Override
@@ -85,6 +89,10 @@ public class MusicApplication extends Application {
 
     public static Realm getMyRealm() {
         return myRealm;
+    }
+
+    public static List<HashMap<String, String>> getListSong() {
+        return listSong;
     }
 
 }

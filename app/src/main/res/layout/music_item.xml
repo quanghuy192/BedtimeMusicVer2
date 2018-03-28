@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
+    <ImageView
+        android:id="@+id/imageSong"
+        android:layout_width="37sp"
+        android:layout_height="37sp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/mp333" />
 
-        <ImageView
-            android:id="@+id/imageSong"
-            android:layout_width="37sp"
-            android:layout_height="37sp"
-            android:src="@drawable/mp333" />
+    <TextView
+        android:id="@+id/songTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/imageSong"
+        android:textColor="@color/blue"
+        android:textSize="19sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:orientation="vertical" >
+    <TextView
+        android:id="@+id/songArtist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/imageSong"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
 
-            <TextView
-                android:id="@+id/songTitle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:textSize="19sp" />
+    <ImageView
+        android:id="@+id/imageLike"
+        android:layout_width="37sp"
+        android:layout_height="37sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/heart" />
 
-            <TextView
-                android:id="@+id/songArtist"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="11sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -62,20 +62,15 @@ public class MusicAccessDatabase {
         while (!listCursor.isAfterLast()) {
             HashMap<String, String> list = new HashMap<String, String>();
             list.put("songId", String.valueOf(listCursor.getLong(0)));
-            Log.i("TAG", String.valueOf(listCursor.getLong(0)));
             list.put("songTitle", listCursor.getString(2));
-            Log.i("TAG", listCursor.getString(2));
             list.put("songPath", listCursor.getString(1));
-            Log.i("TAG", listCursor.getString(1));
             list.put("songArtist", listCursor.getString(3));
-            Log.i("TAG", listCursor.getString(3));
             songListDB.add(list);
             listCursor.moveToNext();
         }
         listCursor.close();
 
         return songListDB;
-
     }
 
     public void add(Music currentMusic) {

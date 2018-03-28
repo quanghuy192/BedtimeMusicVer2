@@ -1,20 +1,26 @@
 package com.hn.huy.bedtimemusicver2.model.business;
 
+import com.hn.huy.bedtimemusicver2.model.entity.Music;
+
+import java.util.List;
+
 /**
  * Created by huy on 7/2/17.
  */
 
-public interface Connecting<T> {
+public interface Connecting<T extends Music> {
 
-    public void find(T object);
+    Music find(T object);
 
-    public void insert(T object);
+    boolean insert(T object);
 
-    public void delete(T object);
+    boolean delete(T object);
 
-    public void update(T objecct);
+    boolean update(T objecct);
 
-    public void findAll();
+    List<Music> findAll();
 
-    public void deleteAll();
+    List<Music> findAll(String songTitle);
+
+    boolean deleteAll();
 }
