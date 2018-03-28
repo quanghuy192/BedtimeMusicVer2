@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -135,6 +136,23 @@ public class MusicListFragment extends BaseFragment {
             Music music = arrayList.get(position);
             viewHolder.songTitle.setText(music.getSongTitle());
             viewHolder.songArtist.setText(music.getSongArtist());
+            viewHolder.imageLike.setTag(String.valueOf(position));
+
+            viewHolder.imageLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ArrayAdapter<Music> adapter = (ArrayAdapter<Music>) listview
+                            .getAdapter();
+                    MusicRealmAccess access = new MusicRealmAccess();
+                    Music currentMusic = adapter.getItem(Integer.parseInt((String) view.getTag()));
+                    Toast.makeText(
+                            getActivity(),
+                            currentMusic.getSongTitle()
+                                    + " is add to your favorite list ",
+                            Toast.LENGTH_SHORT).show();
+                    access.insert(currentMusic);
+                }
+            });
 
             return view;
         }
@@ -142,10 +160,12 @@ public class MusicListFragment extends BaseFragment {
 
     class ViewHolder {
         TextView songTitle, songArtist;
+        ImageView imageLike;
 
         ViewHolder(View base) {
             this.songArtist = (TextView) base.findViewById(R.id.songArtist);
             this.songTitle = (TextView) base.findViewById(R.id.songTitle);
+            this.imageLike = (ImageView) base.findViewById(R.id.imageLike);
         }
     }
 
