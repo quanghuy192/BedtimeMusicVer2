@@ -34,8 +34,8 @@ public class MusicRealmAccess extends BaseAccessDatabase {
 
     @Override
     public boolean insert(Music m) {
-        Music newSong = copy(m);
         realm().beginTransaction();
+        Music newSong = copy(m);
         realm().insert(newSong);
         realm().commitTransaction();
         return false;
@@ -76,13 +76,15 @@ public class MusicRealmAccess extends BaseAccessDatabase {
     public List<Map<String, String>> getList() {
         List<Map<String, String>> songListDB = new ArrayList<>();
         Iterator<Music> results = findAll().iterator();
+        Music m;
 
         while (results.hasNext()) {
             Map<String, String> list = new HashMap<>();
+            m = results.next();
             // list.put("songId", String.valueOf(results.next()..getLong(0)));
-            list.put("songTitle", results.next().getSongTitle());
-            list.put("songPath", results.next().getSongPath());
-            list.put("songArtist", results.next().getSongArtist());
+            list.put("songTitle", m.getSongTitle());
+            list.put("songPath", m.getSongPath());
+            list.put("songArtist", m.getSongArtist());
             songListDB.add(list);
         }
         return songListDB;

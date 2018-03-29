@@ -25,6 +25,8 @@ import com.hn.huy.bedtimemusicver2.model.entity.TypeFragment;
 import com.hn.huy.bedtimemusicver2.service.PlayerService;
 import com.hn.huy.bedtimemusicver2.view.activity.MainActivity;
 
+import java.io.File;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
