@@ -3,7 +3,6 @@ package com.hn.huy.bedtimemusicver2.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hn.huy.bedtimemusicver2.R;
-import com.hn.huy.bedtimemusicver2.model.business.MusicAccessDatabase;
 import com.hn.huy.bedtimemusicver2.model.business.MusicRealmAccess;
 import com.hn.huy.bedtimemusicver2.model.entity.Music;
 import com.hn.huy.bedtimemusicver2.service.PlayerService;
@@ -107,6 +105,12 @@ public class MusicFavoriteFragment extends BaseFragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
+    }
+
     private class MusicListAdapter extends ArrayAdapter<Music> {
 
         List<Music> arrayList;
@@ -162,10 +166,6 @@ public class MusicFavoriteFragment extends BaseFragment {
 
     }
 
-    /**
-     * ContextView
-     */
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
@@ -182,9 +182,9 @@ public class MusicFavoriteFragment extends BaseFragment {
         ArrayAdapter<Music> adapter = (ArrayAdapter<Music>) favoriteList
                 .getAdapter();
 
-        MusicAccessDatabase writeDatabase = new MusicAccessDatabase(
-                getActivity());
-        writeDatabase.openToWrite();
+        // MusicAccessDatabase writeDatabase = new MusicAccessDatabase(
+        // getActivity());
+        // writeDatabase.openToWrite();
         switch (item.getItemId()) {
             case R.id.remove: {
                 Music removeMusic = adapter.getItem(menuInfo.position);
@@ -204,7 +204,7 @@ public class MusicFavoriteFragment extends BaseFragment {
         }
 
         adapter.notifyDataSetChanged();
-        writeDatabase.close();
+        // writeDatabase.close();
         return super.onContextItemSelected(item);
     }
 }

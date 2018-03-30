@@ -35,10 +35,15 @@ public class MusicRealmAccess extends BaseAccessDatabase {
     @Override
     public boolean insert(Music m) {
         realm().beginTransaction();
-        Music newSong = copy(m);
-        realm().insert(newSong);
-        realm().commitTransaction();
-        return false;
+        List<Music> allSongWithTitle = findAll(m.getSongTitle().trim());
+        if (allSongWithTitle.size() > 0) {
+            return false;
+        } else {
+            Music newSong = copy(m);
+            realm().insert(newSong);
+            realm().commitTransaction();
+            return true;
+        }
     }
 
     @Override

@@ -3,10 +3,7 @@ package com.hn.huy.bedtimemusicver2.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,15 +15,13 @@ import android.widget.Toast;
 
 import com.hn.huy.bedtimemusicver2.R;
 import com.hn.huy.bedtimemusicver2.application.MusicApplication;
-import com.hn.huy.bedtimemusicver2.model.business.MusicAccessDatabase;
+import com.hn.huy.bedtimemusicver2.model.business.LoadDataFromSdCard;
 import com.hn.huy.bedtimemusicver2.model.business.MusicRealmAccess;
 import com.hn.huy.bedtimemusicver2.model.entity.Music;
 import com.hn.huy.bedtimemusicver2.model.entity.TypeFragment;
 import com.hn.huy.bedtimemusicver2.service.PlayerService;
 import com.hn.huy.bedtimemusicver2.view.activity.MainActivity;
 
-import java.io.File;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +66,7 @@ public class MusicListFragment extends BaseFragment {
         titleOfTab.setText("Music List");
 
         try {
-            listSong = MusicApplication.SingletonApplication.INSTANCE.getInstance().getListSong();
+            listSong = ((MainActivity) getActivity()).getListSong();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,12 +142,21 @@ public class MusicListFragment extends BaseFragment {
                             .getAdapter();
                     MusicRealmAccess access = new MusicRealmAccess();
                     Music currentMusic = adapter.getItem(Integer.parseInt((String) view.getTag()));
-                    Toast.makeText(
-                            getActivity(),
-                            currentMusic.getSongTitle()
-                                    + " is add to your favorite list ",
-                            Toast.LENGTH_SHORT).show();
-                    access.insert(currentMusic);
+
+                    if (access.insert(currentMusic)) {
+                        viewHolder.imageLike.setImageDrawable(getResources().getDrawable(R.drawable.heart_cl));
+                        Toast.makeText(
+                                getActivity(),
+                                currentMusic.getSongTitle()
+                                        + " is add to your favorite list ",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(
+                                getActivity(),
+                                currentMusic.getSongTitle()
+                                        + " is exist ! ",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -170,55 +174,4 @@ public class MusicListFragment extends BaseFragment {
             this.imageLike = (ImageView) base.findViewById(R.id.imageLike);
         }
     }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        MenuInflater menuInflate = getActivity().getMenuInflater();
-        menuInflate.inflate(R.menu.context, menu);
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo adapterInfo = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
-        ArrayAdapter<Music> adapter = (ArrayAdapter<Music>) listview
-                .getAdapter();
-
-        /*MusicAccessDatabase writeDatabase = new MusicAccessDatabase(getActivity());
-        writeDatabase.openToWrite();
-        switch (item.getItemId()) {
-            case R.id.add:
-                Music currentMusic = adapter.getItem(adapterInfo.position);
-                Toast.makeText(
-                        getActivity(),
-                        currentMusic.getSongTitle()
-                                + " is add to your favorite list ",
-                        Toast.LENGTH_SHORT).show();
-
-                writeDatabase.add(currentMusic);
-                writeDatabase.close();
-                break;
-
-            default:
-                break;
-        }*/
-        MusicRealmAccess access = new MusicRealmAccess();
-        switch (item.getItemId()) {
-            case R.id.add:
-                Music currentMusic = adapter.getItem(adapterInfo.position);
-                Toast.makeText(
-                        getActivity(),
-                        currentMusic.getSongTitle()
-                                + " is add to your favorite list ",
-                        Toast.LENGTH_SHORT).show();
-                access.insert(currentMusic);
-                break;
-            default:
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
 }

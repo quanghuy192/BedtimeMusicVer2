@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.hn.huy.bedtimemusicver2.R;
 import com.hn.huy.bedtimemusicver2.application.MusicApplication;
-import com.hn.huy.bedtimemusicver2.model.business.MusicAccessDatabase;
 import com.hn.huy.bedtimemusicver2.utilities.Utilities;
 import com.hn.huy.bedtimemusicver2.view.activity.MainActivity;
 import com.hn.huy.bedtimemusicver2.view.fragment.MusicListFragment;
@@ -145,8 +144,8 @@ public class PlayerService extends Service implements
         // Displaying time completed playing
         String songCurrentDuration = Utilities.milliSecondsToTimer(currentDuration);
         // Updating progress bar
-        int mProgress = (int) (Utilities.getProgressPercentage(
-                currentDuration, totalDuration));
+        int mProgress = Utilities.getProgressPercentage(
+                currentDuration, totalDuration);
 
         Intent intent = new Intent(CURRENT_SONG_MESG);
         intent.putExtra("songTitle", songTitle);
@@ -155,8 +154,6 @@ public class PlayerService extends Service implements
         intent.putExtra("songProgress", mProgress);
         intent.putExtra("changeIcon", 1);
 
-        Log.i("Duration", "" + mProgress);
-
         sendBroadcast(intent);
     }
 
@@ -164,8 +161,8 @@ public class PlayerService extends Service implements
         String songTitle = songsListingSD.get(currentSongIndex).get("songTitle");
 
         // Updating progress bar
-        int mProgress = (int) (Utilities.getProgressPercentage(
-                currentDuration, totalDuration));
+        int mProgress = Utilities.getProgressPercentage(
+                currentDuration, totalDuration);
 
         Intent intent = new Intent(CURRENT_SONG_MESG);
         intent.putExtra("songTitle", songTitle);
@@ -174,19 +171,17 @@ public class PlayerService extends Service implements
         intent.putExtra("songProgress", mProgress);
         intent.putExtra("changeIcon", 1);
 
-        Log.i("Duration", "" + mProgress);
-
         sendBroadcast(intent);
     }
 
     private void initUI() {
 
         try {
-            MusicAccessDatabase readList = new MusicAccessDatabase(this);
+            /*MusicAccessDatabase readList = new MusicAccessDatabase(this);
             readList.openToRead();
 
             songsListFavorite = readList.getList();
-            readList.close();
+            readList.close();*/
 
         } catch (Exception e) {
             e.printStackTrace();

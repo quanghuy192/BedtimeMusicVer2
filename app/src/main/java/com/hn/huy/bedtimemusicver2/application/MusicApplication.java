@@ -1,6 +1,7 @@
 package com.hn.huy.bedtimemusicver2.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 
@@ -23,7 +24,6 @@ public class MusicApplication extends Application {
     private boolean mRepeat = false;
     private boolean mShuffle = false;
     private static Realm myRealm;
-    private static List<HashMap<String, String>> listSong;
 
     public enum SingletonApplication {
         INSTANCE;
@@ -44,8 +44,6 @@ public class MusicApplication extends Application {
         Realm.init(getApplicationContext());
         myRealm = Realm.getDefaultInstance();
         playerService = new Intent(getApplicationContext(), PlayerService.class);
-        LoadDataFromSdCard dataFromSdCard = new LoadDataFromSdCard();
-        listSong = dataFromSdCard.getListSong(getApplicationContext());
     }
 
     @Override
@@ -90,9 +88,4 @@ public class MusicApplication extends Application {
     public static Realm getMyRealm() {
         return myRealm;
     }
-
-    public static List<HashMap<String, String>> getListSong() {
-        return listSong;
-    }
-
 }
